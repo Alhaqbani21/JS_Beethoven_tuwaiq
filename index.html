@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>بيتهوفن طويق</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="shortcut icon" href="./logo.svg" type="image/x-icon" />
+  </head>
+  <body id="body">
+    <div id="startContainer" class="startContainer">
+      <h1
+        style="
+          color: #4abfdd;
+          text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+            1px 1px 0 #000;
+        "
+      >
+        حياك الله في لعبة بيتهوفن طويق
+      </h1>
+      <h3
+        style="
+          font-size: 1.5em;
+          text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+            1px 1px 0 #000;
+        "
+      >
+        تتوقع تقدر تتعدى مطور اللعبة الي جاب
+        <span style="color: #4abfdd">90</span> نقطة ؟
+      </h3>
+      <h3 id="maxScoreSaved"></h3>
+
+      <button id="start-button">ابدأ التحدي</button>
+    </div>
+    <div id="game-container" style="display: none">
+      <div class="lane" id="lane1">
+        <div id="lane1PlaceHolder" class="placeholder">A</div>
+      </div>
+      <div class="lane" id="lane2">
+        <div id="lane2PlaceHolder" class="placeholder">S</div>
+      </div>
+      <div class="lane" id="lane3">
+        <div id="lane3PlaceHolder" class="placeholder">D</div>
+      </div>
+      <div class="lane" id="lane4">
+        <div id="lane4PlaceHolder" class="placeholder">F</div>
+      </div>
+    </div>
+    <div id="score" style="display: none">النقاط : 0 | الاغلاط : 5 / 0</div>
+    <div id="bonusScore" style="display: none">xالبونص : 1</div>
+    <div id="maxScore" style="display: none">اعلى رقم :</div>
+    <audio id="music" src="./song.mp3" loop></audio>
+    <script src="./script.js"></script>
+  </body>
+</html>

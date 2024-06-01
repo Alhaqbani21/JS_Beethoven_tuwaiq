@@ -1,0 +1,199 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('./Ludwig van Beethoven.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #222;
+  margin: 0;
+  overflow: hidden;
+  color: white;
+}
+
+#start-button {
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#game-container {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  height: 100vh;
+  position: relative;
+}
+
+.lane {
+  width: 20%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+#lane1PlaceHolder {
+  background: linear-gradient(135deg, #ff6ec7, #ff0000);
+}
+#lane2PlaceHolder {
+  background: linear-gradient(135deg, #00ff00, #008000);
+}
+#lane3PlaceHolder {
+  background: linear-gradient(135deg, #00bfff, #0000ff);
+}
+
+#lane4PlaceHolder {
+  background: linear-gradient(135deg, #ffdb58, #ffd700);
+}
+
+.placeholder {
+  width: 100%;
+  height: 100px;
+  background-color: rgba(0, 255, 0, 0.5);
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.note {
+  width: 100%;
+  height: 50px;
+  background-color: #ff0000;
+  position: absolute;
+  top: -50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 10px;
+}
+#bonusScore {
+  position: absolute;
+  top: 100px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#maxScore {
+  position: absolute;
+  top: 200px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 10px;
+}
+.note.a {
+  background: linear-gradient(135deg, #ff6ec7, #ff0000);
+}
+
+.note.s {
+  background: linear-gradient(135deg, #00ff00, #008000);
+}
+
+.note.d {
+  background: linear-gradient(135deg, #00bfff, #0000ff);
+}
+
+.note.f {
+  background: linear-gradient(135deg, #ffdb58, #ffd700);
+}
+
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(125, 178, 86, 0.5);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  z-index: 999;
+}
+.messageFail {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(242, 115, 115, 0.5);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  z-index: 999;
+}
+
+.startContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(
+    109.6deg,
+    rgba(0, 0, 0, 0.93) 11.2%,
+    rgb(63, 61, 61) 78.9%
+  );
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+#start-button {
+  background: #4abfdd;
+  border: 1px solid #4abfdd;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito, roboto, proxima-nova, 'proxima nova', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+#start-button:hover,
+#start-button:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: white;
+}
+
+#start-button:active {
+  opacity: 0.5;
+}
