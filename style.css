@@ -12,6 +12,7 @@ body {
   margin: 0;
   overflow: hidden;
   color: white;
+  flex-direction: column;
 }
 
 #start-button {
@@ -196,4 +197,108 @@ body {
 
 #start-button:active {
   opacity: 0.5;
+}
+
+#leaderboard-button {
+  background: #4abfdd;
+  border: 1px solid #4abfdd;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito, roboto, proxima-nova, 'proxima nova', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  margin-top: 1rem;
+}
+
+#leaderboard-button:hover,
+#leaderboard-button:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: white;
+}
+
+#leaderboard-button:active {
+  opacity: 0.5;
+}
+
+.input-container {
+  position: relative;
+  margin: 50px auto;
+  width: 80%;
+  direction: rtl;
+}
+
+.input-container input[type='text'] {
+  font-size: 20px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 5px 0;
+  background-color: transparent;
+  outline: none;
+  color: white;
+}
+
+.input-container .label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #ccc;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input-container input[type='text']:focus ~ .label,
+.input-container input[type='text']:valid ~ .label {
+  top: -20px;
+  font-size: 16px;
+  color: #4abfdd;
+}
+
+.input-container .underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #4abfdd;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+.input-container input[type='text']:focus ~ .underline,
+.input-container input[type='text']:valid ~ .underline {
+  transform: scaleX(1);
+}
+#leaderboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 1rem;
+
+  background: linear-gradient(
+    109.6deg,
+    rgba(0, 0, 0, 0.93) 11.2%,
+    rgb(63, 61, 61) 78.9%
+  );
+  padding: 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
 }

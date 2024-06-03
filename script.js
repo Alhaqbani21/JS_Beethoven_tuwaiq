@@ -10,15 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const startButton = document.getElementById('start-button');
   const startContainer = document.getElementById('startContainer');
   const gameContainer = document.getElementById('game-container');
+
+  const inputName = document.getElementById('inputName');
+  if (localStorage.getItem('playerName') != null) {
+    inputName.value = localStorage.getItem('playerName');
+  }
   let maxScoreDisplay = document.getElementById('maxScore');
-  let body = document.getElementById('body');
 
   let maxScoreSaved = document.getElementById('maxScoreSaved');
   if (maxScore > 1) {
     maxScoreSaved.innerText = `اعلى رقم جبته ${maxScore} يمديك تجيب اعلى ؟`;
-  }
-  if (maxScore > 270) {
-    maxScoreSaved.innerText = ` مبرووك قدرت تجيب اعلى من مطور اللعبة نقاطك ${maxScore}`;
   }
 
   const keys = 'asdf';
@@ -33,6 +34,45 @@ document.addEventListener('DOMContentLoaded', () => {
   const hitboxHeight = 150;
   const maxMisses = 5;
 
+  async function fetchTopScores() {
+    try {
+      const response = await fetch(
+        'https://6657366e9f970b3b36c864a9.mockapi.io/beethovenGame?sortBy=maxScore&order=desc&limit=10'
+      );
+      const data = await response.json();
+      displayTopScores(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function displayTopScores(scores) {
+    const leaderboardBody = document.getElementById('leaderboard-body');
+    leaderboardBody.innerHTML = '';
+    scores.slice(0, 10).forEach((score, index) => {
+      const row = document.createElement('tr');
+      const rankCell = document.createElement('td');
+      const nameCell = document.createElement('td');
+      const scoreCell = document.createElement('td');
+
+      rankCell.textContent = index + 1;
+      nameCell.textContent = score.name;
+      scoreCell.textContent = score.maxScore;
+
+      row.appendChild(rankCell);
+      row.appendChild(nameCell);
+      row.appendChild(scoreCell);
+
+      leaderboardBody.appendChild(row);
+    });
+
+    document.getElementById('leaderboard').style.display = 'block';
+  }
+
+  document
+    .getElementById('leaderboard-button')
+    .addEventListener('click', fetchTopScores);
+
   function startGame() {
     startContainer.style.display = 'none';
     gameContainer.style.display = 'flex';
@@ -40,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bonusScoreDisplay.style.display = 'block';
     maxScoreDisplay.style.display = 'block';
     maxScoreDisplay.innerText = `اعلى رقم : ${maxScore}`;
+    leaderboard.style.display = 'none';
 
     music.volume = volume;
 
@@ -173,7 +214,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (score > maxScore) {
         maxScore = score;
         localStorage.setItem('maxScore', `${score}`);
+        await postHighScore(localStorage.getItem('playerName'), maxScore);
       }
+
       music.pause();
       music.currentTime = 0;
 
@@ -200,5 +243,52 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(createtringle, spawnInterval);
   }
 
-  startButton.addEventListener('click', startGame);
+  async function postHighScore(name, score) {
+    try {
+      const res = await fetch(
+        'https://6657366e9f970b3b36c864a9.mockapi.io/beethovenGame'
+      );
+      const data = await res.json();
+
+      const playerScore = data.find((entry) => entry.name === name);
+
+      if (playerScore) {
+        if (score > playerScore.maxScore) {
+          const updateResponse = await fetch(
+            `https://6657366e9f970b3b36c864a9.mockapi.io/beethovenGame/${playerScore.id}`,
+            {
+              method: 'PUT',
+              body: JSON.stringify({ name, maxScore: score }),
+              headers: { 'Content-Type': 'application/json' },
+            }
+          );
+          const updateData = await updateResponse.json();
+        } else {
+          return;
+        }
+      } else {
+        const createResponse = await fetch(
+          'https://6657366e9f970b3b36c864a9.mockapi.io/beethovenGame',
+          {
+            method: 'POST',
+            body: JSON.stringify({ name, maxScore: score }),
+            headers: { 'Content-Type': 'application/json' },
+          }
+        );
+        const createData = await createResponse.json();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  startButton.addEventListener('click', () => {
+    const playerName = inputName.value;
+    if (playerName) {
+      localStorage.setItem('playerName', playerName);
+      startGame();
+    } else {
+      alert('الاسم مطلوب');
+    }
+  });
 });

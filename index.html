@@ -18,19 +18,15 @@
       >
         حياك الله في لعبة بيتهوفن طويق
       </h1>
-      <h3
-        style="
-          font-size: 1.5em;
-          text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-            1px 1px 0 #000;
-        "
-      >
-        تتوقع تقدر تتعدى مطور اللعبة الي جاب
-        <span style="color: #4abfdd">270</span> نقطة ؟
-      </h3>
-      <h3 id="maxScoreSaved"></h3>
+      <div class="input-container">
+        <input type="text" id="inputName" required="" />
+        <label for="input" class="label">الأسم</label>
+        <div class="underline"></div>
+      </div>
 
+      <h3 id="maxScoreSaved"></h3>
       <button id="start-button">ابدأ التحدي</button>
+      <button id="leaderboard-button">أعلى 10 لاعبين</button>
     </div>
     <div id="game-container" style="display: none">
       <div class="lane" id="lane1">
@@ -49,6 +45,19 @@
     <div id="score" style="display: none">النقاط : 0 | الاغلاط : 5 / 0</div>
     <div id="bonusScore" style="display: none">xالبونص : 1</div>
     <div id="maxScore" style="display: none">اعلى رقم :</div>
+    <div id="leaderboard" class="leaderboard" style="display: none">
+      <h2>اعلى 10 لاعبين</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>التصنيف</th>
+            <th>الاسم</th>
+            <th>النقاط</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-body"></tbody>
+      </table>
+    </div>
     <audio id="music" src="./song.mp3" loop></audio>
     <script src="./script.js"></script>
   </body>
