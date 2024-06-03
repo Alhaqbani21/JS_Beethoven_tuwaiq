@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   let maxScore =
     localStorage.getItem('maxScore') != null
-      ? localStorage.getItem('maxScore')
+      ? parseInt(localStorage.getItem('maxScore'))
       : 0;
   const lanes = document.querySelectorAll('.lane');
   const scoreDisplay = document.getElementById('score');
@@ -17,12 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (maxScore > 1) {
     maxScoreSaved.innerText = `اعلى رقم جبته ${maxScore} يمديك تجيب اعلى ؟`;
   }
-  if (maxScore > 90) {
+  if (maxScore > 270) {
     maxScoreSaved.innerText = ` مبرووك قدرت تجيب اعلى من مطور اللعبة نقاطك ${maxScore}`;
   }
 
   const keys = 'asdf';
-  let notes = [];
+  let tringles = [];
   let speed = 4;
   let score = 0;
   let bonusScore = 1;
@@ -45,26 +45,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     music.play();
 
-    function createNote() {
+    function createtringle() {
       const laneIndex = Math.floor(Math.random() * lanes.length);
       const randomKey = keys[laneIndex];
-      const note = document.createElement('div');
-      note.classList.add('note');
-      note.classList.add('note-key');
-      note.classList.add(randomKey);
-      note.textContent = randomKey.toUpperCase();
-      lanes[laneIndex].appendChild(note);
-      notes.push({ element: note, laneIndex, key: randomKey });
+      const tringle = document.createElement('div');
+      tringle.classList.add('note');
+      tringle.classList.add('note-key');
+      tringle.classList.add(randomKey);
+      tringle.textContent = randomKey.toUpperCase();
+      lanes[laneIndex].appendChild(tringle);
+      tringles.push({ element: tringle, laneIndex, key: randomKey });
     }
 
-    function moveNotes() {
-      notes.forEach((note) => {
-        const top = parseInt(note.element.style.top || -50);
-        note.element.style.top = top + speed + 'px';
-        if (top > window.innerHeight - 100) {
-          lanes[note.laneIndex].removeChild(note.element);
-          notes = notes.filter((n) => n !== note);
-          decreaseVolumeFor(1);
+    function movetringles() {
+      tringles.forEach((tringle) => {
+        const top = parseInt(tringle.element.style.top || -50);
+        tringle.element.style.top = top + speed + 'px';
+        if (top > window.innerHeight - 50) {
+          lanes[tringle.laneIndex].removeChild(tringle.element);
+          tringles = tringles.filter((n) => n !== tringle);
+          decreaseVolume(1);
           missedScore++;
 
           updateScore();
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
       scoreDisplay.textContent = `النقاط : ${score} | الاغلاط : ${maxMisses} / ${missedScore} `;
     }
 
-    function decreaseVolumeFor(duration) {
+    function decreaseVolume(duration) {
       const originalVolume = music.volume;
       music.volume = 0.1;
       setTimeout(() => {
@@ -110,21 +110,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const laneIndex = keys.indexOf(keyPressed);
       const placeholderBottom = window.innerHeight - 10;
       const placeholderTop = placeholderBottom - hitboxHeight;
-      notes.forEach((note, index) => {
-        const noteTop = parseInt(note.element.style.top);
+      tringles.forEach((tringle, index) => {
+        const tringleTop = parseInt(tringle.element.style.top);
         if (
-          note.key === keyPressed &&
-          !note.hit &&
-          noteTop >= placeholderTop &&
-          noteTop <= placeholderBottom
+          tringle.key === keyPressed &&
+          !tringle.hit &&
+          tringleTop >= placeholderTop &&
+          tringleTop <= placeholderBottom
         ) {
-          lanes[laneIndex].removeChild(note.element);
-          notes.splice(index, 1);
-          note.hit = true;
-          note.element.classList.add('hit');
+          lanes[laneIndex].removeChild(tringle.element);
+          tringles.splice(index, 1);
+          tringle.hit = true;
+          tringle.element.classList.add('hit');
           score = 1 * bonusScore + score;
           updateScore();
-          console.log('Hit! Score:', score);
 
           const perfectMessage = document.createElement('div');
           perfectMessage.textContent = '! كفوو';
@@ -170,14 +169,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    function endGame() {
+    async function endGame() {
       if (score > maxScore) {
+        maxScore = score;
         localStorage.setItem('maxScore', `${score}`);
       }
       music.pause();
       music.currentTime = 0;
 
-      notes = [];
+      tringles = [];
       speed = 4;
       score = 0;
       missedScore = 0;
@@ -194,10 +194,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', keyDownHandler);
 
     setInterval(() => {
-      moveNotes();
+      movetringles();
     }, 20);
 
-    setInterval(createNote, spawnInterval);
+    setInterval(createtringle, spawnInterval);
   }
 
   startButton.addEventListener('click', startGame);
