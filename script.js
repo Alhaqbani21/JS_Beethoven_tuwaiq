@@ -59,9 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
       nameCell.textContent = score.name;
       scoreCell.textContent = score.maxScore;
 
-      row.appendChild(rankCell);
-      row.appendChild(nameCell);
       row.appendChild(scoreCell);
+      row.appendChild(nameCell);
+      row.appendChild(rankCell);
 
       leaderboardBody.appendChild(row);
     });
