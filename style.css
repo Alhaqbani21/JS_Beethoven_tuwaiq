@@ -10,7 +10,7 @@ body {
   background-attachment: fixed;
   background-color: #222;
   margin: 0;
-  overflow: hidden;
+  overflow: auto;
   color: white;
   flex-direction: column;
 }
@@ -298,7 +298,14 @@ body {
     rgba(0, 0, 0, 0.93) 11.2%,
     rgb(63, 61, 61) 78.9%
   );
-  padding: 1rem;
+  padding: 2rem;
   overflow-x: hidden;
   overflow-y: auto;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .startContainer {
+    padding: 0.5rem;
+  }
 }
