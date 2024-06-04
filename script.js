@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .addEventListener('click', fetchTopScores);
 
   function startGame() {
+    alert('لا تنسى تحول الكيبورد انقليزي');
     startContainer.style.display = 'none';
     gameContainer.style.display = 'flex';
     scoreDisplay.style.display = 'block';
